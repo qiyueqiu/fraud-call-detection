@@ -1,0 +1,211 @@
+{
+  "n_samples": 400,
+  "inducement_strategies": [
+    "trust",
+    "urgency",
+    "emotion",
+    "authority",
+    "paraphrase"
+  ],
+  "evasion_strategies": [
+    "evasion",
+    "benign_disguise",
+    "code_switch"
+  ],
+  "metrics": [
+    "detection_rate (=recall on fraud)",
+    "mean_fraud_prob"
+  ],
+  "results": {
+    "TF-IDF+LogisticRegression": {
+      "original": {
+        "detection_rate": 1.0,
+        "mean_fraud_prob": 0.9907867025857569
+      },
+      "trust": {
+        "detection_rate": 1.0,
+        "mean_fraud_prob": 0.9863719954992436
+      },
+      "urgency": {
+        "detection_rate": 1.0,
+        "mean_fraud_prob": 0.977706682592517
+      },
+      "emotion": {
+        "detection_rate": 0.9975,
+        "mean_fraud_prob": 0.9197576918444657
+      },
+      "authority": {
+        "detection_rate": 1.0,
+        "mean_fraud_prob": 0.9747571495893061
+      },
+      "paraphrase": {
+        "detection_rate": 0.9875,
+        "mean_fraud_prob": 0.9051749620027201
+      },
+      "evasion": {
+        "detection_rate": 0.9425,
+        "mean_fraud_prob": 0.8560800523043052
+      },
+      "benign_disguise": {
+        "detection_rate": 0.9975,
+        "mean_fraud_prob": 0.9729665244906518
+      },
+      "code_switch": {
+        "detection_rate": 0.9925,
+        "mean_fraud_prob": 0.9458062212932566
+      }
+    },
+    "TextCNN": {
+      "original": {
+        "detection_rate": 1.0,
+        "mean_fraud_prob": 0.9996010647714137
+      },
+      "trust": {
+        "detection_rate": 1.0,
+        "mean_fraud_prob": 0.9995233131945134
+      },
+      "urgency": {
+        "detection_rate": 1.0,
+        "mean_fraud_prob": 0.997090527266264
+      },
+      "emotion": {
+        "detection_rate": 1.0,
+        "mean_fraud_prob": 0.9895413622260094
+      },
+      "authority": {
+        "detection_rate": 1.0,
+        "mean_fraud_prob": 0.9995479646325112
+      },
+      "paraphrase": {
+        "detection_rate": 0.9825,
+        "mean_fraud_prob": 0.9659493384242523
+      },
+      "evasion": {
+        "detection_rate": 0.93,
+        "mean_fraud_prob": 0.9127033002927055
+      },
+      "benign_disguise": {
+        "detection_rate": 0.9775,
+        "mean_fraud_prob": 0.9688270645181183
+      },
+      "code_switch": {
+        "detection_rate": 0.9875,
+        "mean_fraud_prob": 0.9843452349444851
+      }
+    },
+    "BiLSTM": {
+      "original": {
+        "detection_rate": 0.9975,
+        "mean_fraud_prob": 0.9974924378842115
+      },
+      "trust": {
+        "detection_rate": 0.9825,
+        "mean_fraud_prob": 0.9836691087735381
+      },
+      "urgency": {
+        "detection_rate": 0.9975,
+        "mean_fraud_prob": 0.998125044927001
+      },
+      "emotion": {
+        "detection_rate": 0.9975,
+        "mean_fraud_prob": 0.997577456459403
+      },
+      "authority": {
+        "detection_rate": 1.0,
+        "mean_fraud_prob": 0.9993688070774078
+      },
+      "paraphrase": {
+        "detection_rate": 0.9725,
+        "mean_fraud_prob": 0.9701900186820421
+      },
+      "evasion": {
+        "detection_rate": 0.8625,
+        "mean_fraud_prob": 0.8581623234363633
+      },
+      "benign_disguise": {
+        "detection_rate": 0.9825,
+        "mean_fraud_prob": 0.9772355922627958
+      },
+      "code_switch": {
+        "detection_rate": 0.97,
+        "mean_fraud_prob": 0.9650388794875471
+      }
+    },
+    "MacBERT": {
+      "original": {
+        "detection_rate": 1.0,
+        "mean_fraud_prob": 0.9998343543708325
+      },
+      "trust": {
+        "detection_rate": 1.0,
+        "mean_fraud_prob": 0.9998595291376113
+      },
+      "urgency": {
+        "detection_rate": 1.0,
+        "mean_fraud_prob": 0.9997718384861947
+      },
+      "emotion": {
+        "detection_rate": 1.0,
+        "mean_fraud_prob": 0.9993049941956997
+      },
+      "authority": {
+        "detection_rate": 1.0,
+        "mean_fraud_prob": 0.9998668718338013
+      },
+      "paraphrase": {
+        "detection_rate": 0.995,
+        "mean_fraud_prob": 0.9948529542889446
+      },
+      "evasion": {
+        "detection_rate": 0.99,
+        "mean_fraud_prob": 0.99077170356235
+      },
+      "benign_disguise": {
+        "detection_rate": 0.99,
+        "mean_fraud_prob": 0.9898321964778006
+      },
+      "code_switch": {
+        "detection_rate": 0.99,
+        "mean_fraud_prob": 0.9901385053433478
+      }
+    },
+    "RoBERTa": {
+      "original": {
+        "detection_rate": 0.9975,
+        "mean_fraud_prob": 0.9964765582978725
+      },
+      "trust": {
+        "detection_rate": 1.0,
+        "mean_fraud_prob": 0.9971911819279193
+      },
+      "urgency": {
+        "detection_rate": 1.0,
+        "mean_fraud_prob": 0.9990743800997735
+      },
+      "emotion": {
+        "detection_rate": 1.0,
+        "mean_fraud_prob": 0.9980849272012711
+      },
+      "authority": {
+        "detection_rate": 1.0,
+        "mean_fraud_prob": 0.9993868899345398
+      },
+      "paraphrase": {
+        "detection_rate": 0.9875,
+        "mean_fraud_prob": 0.9856379201484379
+      },
+      "evasion": {
+        "detection_rate": 0.98,
+        "mean_fraud_prob": 0.9782070708641549
+      },
+      "benign_disguise": {
+        "detection_rate": 0.9325,
+        "mean_fraud_prob": 0.9274928404789534
+      },
+      "code_switch": {
+        "detection_rate": 0.94,
+        "mean_fraud_prob": 0.9343604197609239
+      }
+    }
+  }
+}
