@@ -105,8 +105,8 @@ def main():
     total_steps = len(train_loader) * args.epochs
     scheduler = get_linear_schedule_with_warmup(
         optimizer, int(0.1 * total_steps), total_steps)
-    scaler = torch.amp.GradScaler("cuda")
-
+    use_amp = (DEVICE == "cuda")
+    scaler = torch.amp.GradScaler(enabled=use_amp)
     best_f1 = -1
     save_dir = os.path.join(MODELS, f"bert_{args.tag}")
     history = []
@@ -118,9 +118,10 @@ def main():
             mask = batch["attention_mask"].to(DEVICE)
             labels = batch["labels"].to(DEVICE)
             optimizer.zero_grad()
-            with torch.amp.autocast("cuda"):
+            with torch.amp.autocast("cuda", enabled=use_amp):
                 out = model(input_ids=input_ids, attention_mask=mask, labels=labels)
                 loss = out.loss
+            assert loss is not None
             scaler.scale(loss).backward()
             scaler.step(optimizer)
             scaler.update()

@@ -175,7 +175,7 @@ def run_bert(model_path, tag, epochs, batch_size, lr, max_len):
     optimizer = torch.optim.AdamW(model.parameters(), lr=lr, weight_decay=0.01)
     total_steps = len(tl) * epochs
     scheduler = get_linear_schedule_with_warmup(optimizer, int(0.1 * total_steps), total_steps)
-    scaler = torch.amp.GradScaler("cuda")
+    scaler = torch.amp.GradScaler(enabled=(DEVICE == "cuda"))
 
     def evaluate(loader):
         model.eval()
@@ -195,7 +195,7 @@ def run_bert(model_path, tag, epochs, batch_size, lr, max_len):
         model.train(); total = 0
         for step, b in enumerate(tl):
             optimizer.zero_grad()
-            with torch.amp.autocast("cuda"):
+            with torch.amp.autocast("cuda", enabled=(DEVICE == "cuda")):
                 logits = model(input_ids=b["input_ids"].to(DEVICE),
                                attention_mask=b["attention_mask"].to(DEVICE)).logits
                 loss = criterion(logits, b["labels"].to(DEVICE))
