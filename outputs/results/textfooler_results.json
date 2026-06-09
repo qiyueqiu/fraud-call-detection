@@ -1,0 +1,65 @@
+{
+  "method": "TextFooler (Jin et al. 2020), 中文离线适配: jieba WIR + MacBERT-MLM 候选 + 词性/句向量约束",
+  "n_samples": 200,
+  "sim_thresh": 0.7,
+  "mlm_topk": 40,
+  "max_perturb_ratio": 0.4,
+  "metrics_def": {
+    "attack_success_rate": "翻转成功数/原本分类正确数",
+    "perturbation_rate": "成功样本平均(改词数/词数)",
+    "avg_queries": "平均每条样本对分类器查询次数",
+    "accuracy_under_attack": "攻击后欺诈样本上的准确率(越低攻击越强)"
+  },
+  "results": {
+    "BiLSTM": {
+      "n_total": 200,
+      "n_attacked": 200,
+      "n_skipped": 0,
+      "n_success": 177,
+      "attack_success_rate": 0.885,
+      "perturbation_rate": 0.0862,
+      "avg_queries": 483.8,
+      "accuracy_under_attack": 0.115
+    },
+    "TextCNN": {
+      "n_total": 200,
+      "n_attacked": 200,
+      "n_skipped": 0,
+      "n_success": 87,
+      "attack_success_rate": 0.435,
+      "perturbation_rate": 0.1047,
+      "avg_queries": 790.5,
+      "accuracy_under_attack": 0.565
+    },
+    "TF-IDF+LR": {
+      "n_total": 200,
+      "n_attacked": 200,
+      "n_skipped": 0,
+      "n_success": 95,
+      "attack_success_rate": 0.475,
+      "perturbation_rate": 0.1401,
+      "avg_queries": 717.6,
+      "accuracy_under_attack": 0.525
+    },
+    "RoBERTa": {
+      "n_total": 200,
+      "n_attacked": 199,
+      "n_skipped": 1,
+      "n_success": 9,
+      "attack_success_rate": 0.0452,
+      "perturbation_rate": 0.0465,
+      "avg_queries": 740.9,
+      "accuracy_under_attack": 0.9548
+    },
+    "MacBERT": {
+      "n_total": 200,
+      "n_attacked": 200,
+      "n_skipped": 0,
+      "n_success": 26,
+      "attack_success_rate": 0.13,
+      "perturbation_rate": 0.1282,
+      "avg_queries": 711.6,
+      "accuracy_under_attack": 0.87
+    }
+  }
+}

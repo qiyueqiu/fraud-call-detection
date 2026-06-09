@@ -1,0 +1,60 @@
+训练 6609 / 验证 734 / 测试 1391
+类别分布(train): {'客服诈骗': 2360, '银行诈骗': 1892, '投资诈骗': 935, '钓鱼诈骗': 523, '彩票诈骗': 459, '绑架诈骗': 318, '身份盗窃': 122}
+Loading weights:   0%|          | 0/199 [00:00<?, ?it/s]Loading weights: 100%|██████████| 199/199 [00:00<00:00, 37145.82it/s]
+[transformers] [1mBertForSequenceClassification LOAD REPORT[0m from: /home/qiqi/.cache/hf_manual/chinese-macbert-base
+Key                                        | Status     | 
+-------------------------------------------+------------+-
+cls.seq_relationship.weight                | UNEXPECTED | 
+cls.predictions.bias                       | UNEXPECTED | 
+cls.seq_relationship.bias                  | UNEXPECTED | 
+cls.predictions.transform.LayerNorm.bias   | UNEXPECTED | 
+cls.predictions.decoder.weight             | UNEXPECTED | 
+cls.predictions.transform.LayerNorm.weight | UNEXPECTED | 
+cls.predictions.decoder.bias               | UNEXPECTED | 
+cls.predictions.transform.dense.weight     | UNEXPECTED | 
+cls.predictions.transform.dense.bias       | UNEXPECTED | 
+classifier.weight                          | MISSING    | 
+classifier.bias                            | MISSING    | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+  epoch 1 step 0/207 loss 1.9402
+  epoch 1 step 50/207 loss 1.6512
+  epoch 1 step 100/207 loss 0.9941
+  epoch 1 step 150/207 loss 0.8520
+  epoch 1 step 200/207 loss 0.9950
+[epoch 1] loss=1.1621 val_macro_f1=0.5934
+Writing model shards:   0%|          | 0/1 [00:00<?, ?it/s]Writing model shards: 100%|██████████| 1/1 [00:00<00:00,  1.24it/s]Writing model shards: 100%|██████████| 1/1 [00:00<00:00,  1.24it/s]
+  epoch 2 step 0/207 loss 1.3806
+  epoch 2 step 50/207 loss 0.7648
+  epoch 2 step 100/207 loss 0.5544
+  epoch 2 step 150/207 loss 0.4958
+  epoch 2 step 200/207 loss 0.9157
+[epoch 2] loss=0.7002 val_macro_f1=0.6865
+Writing model shards:   0%|          | 0/1 [00:00<?, ?it/s]Writing model shards: 100%|██████████| 1/1 [00:00<00:00,  1.64it/s]Writing model shards: 100%|██████████| 1/1 [00:00<00:00,  1.63it/s]
+  epoch 3 step 0/207 loss 0.4677
+  epoch 3 step 50/207 loss 0.4602
+  epoch 3 step 100/207 loss 0.5016
+  epoch 3 step 150/207 loss 0.5218
+  epoch 3 step 200/207 loss 0.4785
+[epoch 3] loss=0.5837 val_macro_f1=0.7168
+Writing model shards:   0%|          | 0/1 [00:00<?, ?it/s]Writing model shards: 100%|██████████| 1/1 [00:00<00:00,  1.37it/s]Writing model shards: 100%|██████████| 1/1 [00:00<00:00,  1.37it/s]
+  epoch 4 step 0/207 loss 0.2759
+  epoch 4 step 50/207 loss 0.6919
+  epoch 4 step 100/207 loss 0.4883
+  epoch 4 step 150/207 loss 0.3022
+  epoch 4 step 200/207 loss 0.4964
+[epoch 4] loss=0.4868 val_macro_f1=0.7181
+Writing model shards:   0%|          | 0/1 [00:00<?, ?it/s]Writing model shards: 100%|██████████| 1/1 [00:00<00:00,  1.72it/s]Writing model shards: 100%|██████████| 1/1 [00:00<00:00,  1.72it/s]
+  epoch 5 step 0/207 loss 0.3270
+  epoch 5 step 50/207 loss 0.5109
+  epoch 5 step 100/207 loss 0.2306
+  epoch 5 step 150/207 loss 0.6430
+  epoch 5 step 200/207 loss 0.3085
+[epoch 5] loss=0.4101 val_macro_f1=0.7388
+Writing model shards:   0%|          | 0/1 [00:00<?, ?it/s]Writing model shards: 100%|██████████| 1/1 [-00:00<00:00, -2.09it/s]
+加载最优权重在测试集评估...
+Loading weights:   0%|          | 0/201 [00:00<?, ?it/s]Loading weights: 100%|██████████| 201/201 [00:00<00:00, 2431.98it/s]
+[TEST] acc=0.7455  macro-F1=0.7448  weighted-F1=0.7509
+结果已保存。
