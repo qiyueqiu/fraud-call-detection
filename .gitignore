@@ -26,3 +26,6 @@ paper/*.toc
 
 # 系统
 .DS_Store
+
+# 编辑器(本地解释器路径等,因机器而异)
+.vscode/
