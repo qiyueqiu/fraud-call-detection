@@ -73,41 +73,46 @@ def run_traditional():
     from sklearn.svm import LinearSVC
     jieba.setLogLevel(20)
 
-    train = pd.concat([load_fraud_split("train"), load_fraud_split("val")],
-                      ignore_index=True)
+    train = load_fraud_split("train")
+    val = load_fraud_split("val")
     test = load_fraud_split("test")
-    print(f"训练 {len(train)} / 测试 {len(test)} (欺诈样本)")
+    print(f"训练 {len(train)} / 验证 {len(val)} / 测试 {len(test)} (欺诈样本)")
     print("类别分布(train):", train["fraud_type"].value_counts().to_dict())
 
     tok = lambda t: " ".join(jieba.cut(str(t)))
     Xtr_txt = train["text"].apply(tok)
+    Xval_txt = val["text"].apply(tok)
     Xte_txt = test["text"].apply(tok)
     vec = TfidfVectorizer(ngram_range=(1, 2), max_features=50000, min_df=2,
                           sublinear_tf=True)
     Xtr = vec.fit_transform(Xtr_txt)
+    Xval = vec.transform(Xval_txt)
     Xte = vec.transform(Xte_txt)
-    ytr, yte = train["y"].values, test["y"].values
+    ytr, yval, yte = train["y"].values, val["y"].values, test["y"].values
 
     models = {
         "LogisticRegression": LogisticRegression(
-            max_iter=2000, C=8.0, class_weight="balanced", n_jobs=-1),
+            max_iter=2000, C=8.0, class_weight="balanced"),
         "LinearSVM": LinearSVC(C=1.0, class_weight="balanced"),
     }
     results = {}
-    best_f1, best_name, best_clf = -1, None, None
+    # 模型选择在【验证集】上进行,test 仅用于最终报告(避免 test-set selection)
+    best_val_f1, best_name, best_clf = -1, None, None
     for name, clf in models.items():
         print(f"\n训练 {name} ...")
         clf.fit(Xtr, ytr)
-        pred = clf.predict(Xte)
-        m = full_metrics(yte, pred)
+        val_f1 = f1_score(yval, clf.predict(Xval), average="macro", zero_division=0)
+        m = full_metrics(yte, clf.predict(Xte))
+        m["val_macro_f1"] = val_f1
         results[name] = m
-        print(f"  acc={m['accuracy']:.4f}  macro-F1={m['macro_f1']:.4f}  "
-              f"weighted-F1={m['weighted_f1']:.4f}")
-        if m["macro_f1"] > best_f1:
-            best_f1, best_name, best_clf = m["macro_f1"], name, clf
+        print(f"  [val] macro-F1={val_f1:.4f}   [test] acc={m['accuracy']:.4f}  "
+              f"macro-F1={m['macro_f1']:.4f}  weighted-F1={m['weighted_f1']:.4f}")
+        if val_f1 > best_val_f1:
+            best_val_f1, best_name, best_clf = val_f1, name, clf
 
-    results["_meta"] = {"labels": LABELS, "n_train": len(train), "n_test": len(test),
-                        "best": best_name}
+    results["_meta"] = {"labels": LABELS, "n_train": len(train), "n_val": len(val),
+                        "n_test": len(test), "best": best_name,
+                        "selected_by": "val_macro_f1"}
     with open(os.path.join(RES, "fraud_type_traditional.json"), "w",
               encoding="utf-8") as f:
         json.dump(results, f, ensure_ascii=False, indent=2)
@@ -115,7 +120,8 @@ def run_traditional():
     joblib.dump(best_clf, os.path.join(MODELS, f"ftype_traditional_{best_name}.joblib"))
     with open(os.path.join(MODELS, "ftype_label_map.json"), "w", encoding="utf-8") as f:
         json.dump({"labels": LABELS, "label2id": LABEL2ID}, f, ensure_ascii=False, indent=2)
-    print(f"\n最优传统模型: {best_name} (macro-F1={best_f1:.4f}),已保存。")
+    print(f"\n最优传统模型(按验证集选): {best_name} "
+          f"(val macro-F1={best_val_f1:.4f}, test macro-F1={results[best_name]['macro_f1']:.4f}),已保存。")
 
 
 # ===================== BERT 微调 =====================
