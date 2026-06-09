@@ -141,31 +141,51 @@ def main():
     print("可用策略:", avail)
 
     results = {}
+    # bootstrap 配置:对 ΔDR(检出率下降)做配对自助重采样,给 95% 置信区间
+    N_BOOT = 2000
+    rng = np.random.RandomState(42)
+    boot_idx = [rng.randint(0, n, n) for _ in range(N_BOOT)]
+
     for mname, (kind, tag) in models.items():
         print(f"\n--- 模型 {mname} ---")
         row = {}
-        pred, prob = run(orig_texts, kind, tag)
-        row["original"] = {"detection_rate": float(np.mean(pred == 1)),
-                           "mean_fraud_prob": float(np.mean(prob))}
+        pred_o, prob_o = run(orig_texts, kind, tag)
+        hit_o = (pred_o == 1).astype(float)  # 原始逐样本命中
+        row["original"] = {"detection_rate": float(hit_o.mean()),
+                           "mean_fraud_prob": float(np.mean(prob_o))}
         print(f"  original   : 检出率 {row['original']['detection_rate']:.4f}  "
               f"置信度 {row['original']['mean_fraud_prob']:.4f}")
         for strat in avail:
             df = pd.read_csv(os.path.join(REWRITTEN, f"test_{strat}.csv"))
             pred, prob = run(df["text"].tolist(), kind, tag)
-            dr = float(np.mean(pred == 1))
+            hit_r = (pred == 1).astype(float)
+            dr = float(hit_r.mean())
             mp = float(np.mean(prob))
-            row[strat] = {"detection_rate": dr, "mean_fraud_prob": mp}
-            d_dr = row["original"]["detection_rate"] - dr
+            # 配对 bootstrap:ΔDR = 原始命中 - 改写命中,逐次重采样
+            delta = hit_o - hit_r
+            boot_deltas = np.array([delta[idx].mean() for idx in boot_idx])
+            ci_low, ci_high = np.percentile(boot_deltas, [2.5, 97.5])
+            # 显著:95% CI 不含 0 且下界 > 0(检出率确实下降)
+            significant = bool(ci_low > 0)
+            row[strat] = {
+                "detection_rate": dr, "mean_fraud_prob": mp,
+                "delta_dr": float(delta.mean()),
+                "delta_dr_ci95": [round(float(ci_low), 4), round(float(ci_high), 4)],
+                "significant_drop": significant,
+            }
             d_mp = row["original"]["mean_fraud_prob"] - mp
-            print(f"  {strat:13s}: 检出率 {dr:.4f} (ΔDR {d_dr:+.4f})  "
-                  f"置信度 {mp:.4f} (Δprob {d_mp:+.4f})")
+            sig = "*" if significant else " "
+            print(f"  {strat:13s}: 检出率 {dr:.4f} (ΔDR {delta.mean():+.4f} "
+                  f"CI[{ci_low:+.4f},{ci_high:+.4f}]{sig})  置信度 {mp:.4f} (Δ{d_mp:+.4f})")
         results[mname] = row
 
     out = {
         "n_samples": n,
+        "bootstrap_iters": N_BOOT,
         "inducement_strategies": [s for s in INDUCEMENT if s in avail],
         "evasion_strategies": [s for s in EVASION if s in avail],
         "metrics": ["detection_rate (=recall on fraud)", "mean_fraud_prob"],
+        "note": "delta_dr_ci95 为配对bootstrap的检出率下降95%置信区间;significant_drop=CI下界>0",
         "results": results,
     }
     with open(os.path.join(RES, "robustness_results.json"), "w", encoding="utf-8") as f:

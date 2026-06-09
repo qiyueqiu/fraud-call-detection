@@ -77,6 +77,11 @@ def main():
 
     torch.manual_seed(42)
     np.random.seed(42)
+    import random
+    random.seed(42)
+    torch.cuda.manual_seed_all(42)
+    torch.backends.cudnn.deterministic = True
+    torch.backends.cudnn.benchmark = False
 
     train = pd.read_csv(os.path.join(PROC, "train.csv"))
     val = pd.read_csv(os.path.join(PROC, "val.csv"))
@@ -91,7 +96,8 @@ def main():
     val_ds = DialogueDataset(val["text"], val["label"], tokenizer, args.max_len)
     test_ds = DialogueDataset(test["text"], test["label"], tokenizer, args.max_len)
 
-    train_loader = DataLoader(train_ds, batch_size=args.batch_size, shuffle=True, num_workers=4)
+    g = torch.Generator(); g.manual_seed(42)
+    train_loader = DataLoader(train_ds, batch_size=args.batch_size, shuffle=True, num_workers=4, generator=g)
     val_loader = DataLoader(val_ds, batch_size=64, num_workers=4)
     test_loader = DataLoader(test_ds, batch_size=64, num_workers=4)
 

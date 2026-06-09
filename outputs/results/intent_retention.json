@@ -1,0 +1,42 @@
+{
+  "trust": {
+    "n_judged": 100,
+    "n_fraud": 100,
+    "intent_retention_rate": 1.0
+  },
+  "urgency": {
+    "n_judged": 100,
+    "n_fraud": 100,
+    "intent_retention_rate": 1.0
+  },
+  "emotion": {
+    "n_judged": 100,
+    "n_fraud": 100,
+    "intent_retention_rate": 1.0
+  },
+  "authority": {
+    "n_judged": 100,
+    "n_fraud": 100,
+    "intent_retention_rate": 1.0
+  },
+  "paraphrase": {
+    "n_judged": 100,
+    "n_fraud": 96,
+    "intent_retention_rate": 0.96
+  },
+  "evasion": {
+    "n_judged": 100,
+    "n_fraud": 98,
+    "intent_retention_rate": 0.98
+  },
+  "benign_disguise": {
+    "n_judged": 100,
+    "n_fraud": 96,
+    "intent_retention_rate": 0.96
+  },
+  "code_switch": {
+    "n_judged": 100,
+    "n_fraud": 100,
+    "intent_retention_rate": 1.0
+  }
+}

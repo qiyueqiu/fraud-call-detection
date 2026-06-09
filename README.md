@@ -112,9 +112,30 @@ python src/utils/plot_results.py                                       # 可视�
 - GPU:NVIDIA RTX 5090(24GB),CUDA 可用
 - 预训练模型:`hfl/chinese-roberta-wwm-ext`、`hfl/chinese-macbert-base`
 
+## 模型权重
+
+训练好的模型权重(约 790MB)未纳入版本库(见 `.gitignore`),需本地复现生成:
+
+```bash
+python src/models/traditional_ml.py     # 传统 ML,约 1 分钟(CPU)
+python src/models/deep_models.py --arch textcnn --tag textcnn   # 约 2 分钟(GPU)
+python src/models/deep_models.py --arch bilstm  --tag bilstm    # 约 3 分钟(GPU)
+python src/models/bert_finetune.py --model hfl/chinese-roberta-wwm-ext --tag roberta   # 约 5 分钟(GPU)
+python src/models/bert_finetune.py --model hfl/chinese-macbert-base     --tag macbert  # 约 5 分钟(GPU)
+```
+
+所有训练已固定随机种子(`seed=42`,含 `cudnn.deterministic` 与 DataLoader generator),在相同环境下可复现。预训练模型权重首次运行时自动从 HuggingFace Hub 下载。
+
+## 复现性与统计严谨性
+
+- **捷径诊断**(`src/data/shortcut_diagnosis.py`):验证高性能根因。结果显示 train/test 无泄漏,但单一关键词规则即可达 F1=0.73,而学习模型达 0.9996,说明模型在关键词之外还捕捉了话术结构特征。
+- **改写意图保留校验**(`src/rewrite/verify_intent.py`):用 LLM 二次判定改写样本是否仍为欺诈,报告意图保留率,确保鲁棒性结论可信。
+- **Bootstrap 置信区间**(`src/rewrite/evaluate_robustness.py`):对检出率下降做 2000 次配对自助重采样,给出 95% CI 与显著性标记。诱导增强组的下降统计不显著,对抗规避组显著。
+- **错误案例分析**(`src/rewrite/error_analysis.py`):剖析被关键词规避翻转的 false negative 样本。
+
 ## 论文
 
-完整论文见 [`paper/main.pdf`](paper/main.pdf),涵盖研究背景、相关工作、方法解读、实验分析与参考文献,共 14 页。
+完整论文见 [`paper/main.pdf`](paper/main.pdf),涵盖研究背景、相关工作、方法解读、实验分析与参考文献。所有实验图表采用 PDF 矢量图。
 
 ## 致谢
 

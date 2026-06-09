@@ -126,6 +126,11 @@ def main():
 
     torch.manual_seed(42)
     np.random.seed(42)
+    import random
+    random.seed(42)
+    torch.cuda.manual_seed_all(42)
+    torch.backends.cudnn.deterministic = True
+    torch.backends.cudnn.benchmark = False
 
     train = pd.read_csv(os.path.join(PROC, "train.csv"))
     val = pd.read_csv(os.path.join(PROC, "val.csv"))
@@ -137,7 +142,8 @@ def main():
     train_ds = CharDataset(train["text"], train["label"], vocab, args.max_len)
     val_ds = CharDataset(val["text"], val["label"], vocab, args.max_len)
     test_ds = CharDataset(test["text"], test["label"], vocab, args.max_len)
-    train_loader = DataLoader(train_ds, batch_size=args.batch_size, shuffle=True)
+    g = torch.Generator(); g.manual_seed(42)
+    train_loader = DataLoader(train_ds, batch_size=args.batch_size, shuffle=True, generator=g)
     val_loader = DataLoader(val_ds, batch_size=128)
     test_loader = DataLoader(test_ds, batch_size=128)
 

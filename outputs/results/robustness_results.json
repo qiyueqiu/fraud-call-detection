@@ -1,5 +1,6 @@
 {
   "n_samples": 400,
+  "bootstrap_iters": 2000,
   "inducement_strategies": [
     "trust",
     "urgency",
@@ -16,6 +17,7 @@
     "detection_rate (=recall on fraud)",
     "mean_fraud_prob"
   ],
+  "note": "delta_dr_ci95 为配对bootstrap的检出率下降95%置信区间;significant_drop=CI下界>0",
   "results": {
     "TF-IDF+LogisticRegression": {
       "original": {
@@ -24,35 +26,83 @@
       },
       "trust": {
         "detection_rate": 1.0,
-        "mean_fraud_prob": 0.9863719954992436
+        "mean_fraud_prob": 0.9863719954992436,
+        "delta_dr": 0.0,
+        "delta_dr_ci95": [
+          0.0,
+          0.0
+        ],
+        "significant_drop": false
       },
       "urgency": {
         "detection_rate": 1.0,
-        "mean_fraud_prob": 0.977706682592517
+        "mean_fraud_prob": 0.977706682592517,
+        "delta_dr": 0.0,
+        "delta_dr_ci95": [
+          0.0,
+          0.0
+        ],
+        "significant_drop": false
       },
       "emotion": {
         "detection_rate": 0.9975,
-        "mean_fraud_prob": 0.9197576918444657
+        "mean_fraud_prob": 0.9197576918444657,
+        "delta_dr": 0.0025,
+        "delta_dr_ci95": [
+          0.0,
+          0.0075
+        ],
+        "significant_drop": false
       },
       "authority": {
         "detection_rate": 1.0,
-        "mean_fraud_prob": 0.9747571495893061
+        "mean_fraud_prob": 0.9747571495893061,
+        "delta_dr": 0.0,
+        "delta_dr_ci95": [
+          0.0,
+          0.0
+        ],
+        "significant_drop": false
       },
       "paraphrase": {
         "detection_rate": 0.9875,
-        "mean_fraud_prob": 0.9051749620027201
+        "mean_fraud_prob": 0.9051749620027201,
+        "delta_dr": 0.0125,
+        "delta_dr_ci95": [
+          0.0025,
+          0.025
+        ],
+        "significant_drop": true
       },
       "evasion": {
         "detection_rate": 0.9425,
-        "mean_fraud_prob": 0.8560800523043052
+        "mean_fraud_prob": 0.8560800523043052,
+        "delta_dr": 0.0575,
+        "delta_dr_ci95": [
+          0.035,
+          0.08
+        ],
+        "significant_drop": true
       },
       "benign_disguise": {
         "detection_rate": 0.9975,
-        "mean_fraud_prob": 0.9729665244906518
+        "mean_fraud_prob": 0.9729665244906518,
+        "delta_dr": 0.0025,
+        "delta_dr_ci95": [
+          0.0,
+          0.0075
+        ],
+        "significant_drop": false
       },
       "code_switch": {
         "detection_rate": 0.9925,
-        "mean_fraud_prob": 0.9458062212932566
+        "mean_fraud_prob": 0.9458062212932566,
+        "delta_dr": 0.0075,
+        "delta_dr_ci95": [
+          0.0,
+          0.0175
+        ],
+        "significant_drop": false
       }
     },
     "TextCNN": {
@@ -62,35 +112,83 @@
       },
       "trust": {
         "detection_rate": 1.0,
-        "mean_fraud_prob": 0.9995233131945134
+        "mean_fraud_prob": 0.9995233131945134,
+        "delta_dr": 0.0,
+        "delta_dr_ci95": [
+          0.0,
+          0.0
+        ],
+        "significant_drop": false
       },
       "urgency": {
         "detection_rate": 1.0,
-        "mean_fraud_prob": 0.997090527266264
+        "mean_fraud_prob": 0.997090527266264,
+        "delta_dr": 0.0,
+        "delta_dr_ci95": [
+          0.0,
+          0.0
+        ],
+        "significant_drop": false
       },
       "emotion": {
         "detection_rate": 1.0,
-        "mean_fraud_prob": 0.9895413622260094
+        "mean_fraud_prob": 0.9895413622260094,
+        "delta_dr": 0.0,
+        "delta_dr_ci95": [
+          0.0,
+          0.0
+        ],
+        "significant_drop": false
       },
       "authority": {
         "detection_rate": 1.0,
-        "mean_fraud_prob": 0.9995479646325112
+        "mean_fraud_prob": 0.9995479646325112,
+        "delta_dr": 0.0,
+        "delta_dr_ci95": [
+          0.0,
+          0.0
+        ],
+        "significant_drop": false
       },
       "paraphrase": {
         "detection_rate": 0.9825,
-        "mean_fraud_prob": 0.9659493384242523
+        "mean_fraud_prob": 0.9659493384242523,
+        "delta_dr": 0.0175,
+        "delta_dr_ci95": [
+          0.005,
+          0.0325
+        ],
+        "significant_drop": true
       },
       "evasion": {
         "detection_rate": 0.93,
-        "mean_fraud_prob": 0.9127033002927055
+        "mean_fraud_prob": 0.9127033002927055,
+        "delta_dr": 0.07,
+        "delta_dr_ci95": [
+          0.0475,
+          0.095
+        ],
+        "significant_drop": true
       },
       "benign_disguise": {
         "detection_rate": 0.9775,
-        "mean_fraud_prob": 0.9688270645181183
+        "mean_fraud_prob": 0.9688270645181183,
+        "delta_dr": 0.0225,
+        "delta_dr_ci95": [
+          0.01,
+          0.0375
+        ],
+        "significant_drop": true
       },
       "code_switch": {
         "detection_rate": 0.9875,
-        "mean_fraud_prob": 0.9843452349444851
+        "mean_fraud_prob": 0.9843452349444851,
+        "delta_dr": 0.0125,
+        "delta_dr_ci95": [
+          0.0025,
+          0.025
+        ],
+        "significant_drop": true
       }
     },
     "BiLSTM": {
@@ -100,35 +198,83 @@
       },
       "trust": {
         "detection_rate": 0.9825,
-        "mean_fraud_prob": 0.9836691087735381
+        "mean_fraud_prob": 0.9836691087735381,
+        "delta_dr": 0.015,
+        "delta_dr_ci95": [
+          0.005,
+          0.0275
+        ],
+        "significant_drop": true
       },
       "urgency": {
         "detection_rate": 0.9975,
-        "mean_fraud_prob": 0.998125044927001
+        "mean_fraud_prob": 0.998125044927001,
+        "delta_dr": 0.0,
+        "delta_dr_ci95": [
+          0.0,
+          0.0
+        ],
+        "significant_drop": false
       },
       "emotion": {
         "detection_rate": 0.9975,
-        "mean_fraud_prob": 0.997577456459403
+        "mean_fraud_prob": 0.997577456459403,
+        "delta_dr": 0.0,
+        "delta_dr_ci95": [
+          0.0,
+          0.0
+        ],
+        "significant_drop": false
       },
       "authority": {
         "detection_rate": 1.0,
-        "mean_fraud_prob": 0.9993688070774078
+        "mean_fraud_prob": 0.9993688070774078,
+        "delta_dr": -0.0025,
+        "delta_dr_ci95": [
+          -0.0075,
+          0.0
+        ],
+        "significant_drop": false
       },
       "paraphrase": {
         "detection_rate": 0.9725,
-        "mean_fraud_prob": 0.9701900186820421
+        "mean_fraud_prob": 0.9701900186820421,
+        "delta_dr": 0.025,
+        "delta_dr_ci95": [
+          0.01,
+          0.04
+        ],
+        "significant_drop": true
       },
       "evasion": {
         "detection_rate": 0.8625,
-        "mean_fraud_prob": 0.8581623234363633
+        "mean_fraud_prob": 0.8581623234363633,
+        "delta_dr": 0.135,
+        "delta_dr_ci95": [
+          0.1025,
+          0.17
+        ],
+        "significant_drop": true
       },
       "benign_disguise": {
         "detection_rate": 0.9825,
-        "mean_fraud_prob": 0.9772355922627958
+        "mean_fraud_prob": 0.9772355922627958,
+        "delta_dr": 0.015,
+        "delta_dr_ci95": [
+          0.005,
+          0.0275
+        ],
+        "significant_drop": true
       },
       "code_switch": {
         "detection_rate": 0.97,
-        "mean_fraud_prob": 0.9650388794875471
+        "mean_fraud_prob": 0.9650388794875471,
+        "delta_dr": 0.0275,
+        "delta_dr_ci95": [
+          0.0125,
+          0.045
+        ],
+        "significant_drop": true
       }
     },
     "MacBERT": {
@@ -138,35 +284,83 @@
       },
       "trust": {
         "detection_rate": 1.0,
-        "mean_fraud_prob": 0.9998595291376113
+        "mean_fraud_prob": 0.9998595291376113,
+        "delta_dr": 0.0,
+        "delta_dr_ci95": [
+          0.0,
+          0.0
+        ],
+        "significant_drop": false
       },
       "urgency": {
         "detection_rate": 1.0,
-        "mean_fraud_prob": 0.9997718384861947
+        "mean_fraud_prob": 0.9997718384861947,
+        "delta_dr": 0.0,
+        "delta_dr_ci95": [
+          0.0,
+          0.0
+        ],
+        "significant_drop": false
       },
       "emotion": {
         "detection_rate": 1.0,
-        "mean_fraud_prob": 0.9993049941956997
+        "mean_fraud_prob": 0.9993049941956997,
+        "delta_dr": 0.0,
+        "delta_dr_ci95": [
+          0.0,
+          0.0
+        ],
+        "significant_drop": false
       },
       "authority": {
         "detection_rate": 1.0,
-        "mean_fraud_prob": 0.9998668718338013
+        "mean_fraud_prob": 0.9998668718338013,
+        "delta_dr": 0.0,
+        "delta_dr_ci95": [
+          0.0,
+          0.0
+        ],
+        "significant_drop": false
       },
       "paraphrase": {
         "detection_rate": 0.995,
-        "mean_fraud_prob": 0.9948529542889446
+        "mean_fraud_prob": 0.9948529542889446,
+        "delta_dr": 0.005,
+        "delta_dr_ci95": [
+          0.0,
+          0.0125
+        ],
+        "significant_drop": false
       },
       "evasion": {
         "detection_rate": 0.99,
-        "mean_fraud_prob": 0.99077170356235
+        "mean_fraud_prob": 0.99077170356235,
+        "delta_dr": 0.01,
+        "delta_dr_ci95": [
+          0.0025,
+          0.02
+        ],
+        "significant_drop": true
       },
       "benign_disguise": {
         "detection_rate": 0.99,
-        "mean_fraud_prob": 0.9898321964778006
+        "mean_fraud_prob": 0.9898321964778006,
+        "delta_dr": 0.01,
+        "delta_dr_ci95": [
+          0.0025,
+          0.02
+        ],
+        "significant_drop": true
       },
       "code_switch": {
         "detection_rate": 0.99,
-        "mean_fraud_prob": 0.9901385053433478
+        "mean_fraud_prob": 0.9901385053433478,
+        "delta_dr": 0.01,
+        "delta_dr_ci95": [
+          0.0025,
+          0.0201
+        ],
+        "significant_drop": true
       }
     },
     "RoBERTa": {
@@ -176,35 +370,83 @@
       },
       "trust": {
         "detection_rate": 1.0,
-        "mean_fraud_prob": 0.9971911819279193
+        "mean_fraud_prob": 0.9971911819279193,
+        "delta_dr": -0.0025,
+        "delta_dr_ci95": [
+          -0.0075,
+          0.0
+        ],
+        "significant_drop": false
       },
       "urgency": {
         "detection_rate": 1.0,
-        "mean_fraud_prob": 0.9990743800997735
+        "mean_fraud_prob": 0.9990743800997735,
+        "delta_dr": -0.0025,
+        "delta_dr_ci95": [
+          -0.0075,
+          0.0
+        ],
+        "significant_drop": false
       },
       "emotion": {
         "detection_rate": 1.0,
-        "mean_fraud_prob": 0.9980849272012711
+        "mean_fraud_prob": 0.9980849272012711,
+        "delta_dr": -0.0025,
+        "delta_dr_ci95": [
+          -0.0075,
+          0.0
+        ],
+        "significant_drop": false
       },
       "authority": {
         "detection_rate": 1.0,
-        "mean_fraud_prob": 0.9993868899345398
+        "mean_fraud_prob": 0.9993868899345398,
+        "delta_dr": -0.0025,
+        "delta_dr_ci95": [
+          -0.0075,
+          0.0
+        ],
+        "significant_drop": false
       },
       "paraphrase": {
         "detection_rate": 0.9875,
-        "mean_fraud_prob": 0.9856379201484379
+        "mean_fraud_prob": 0.9856379201484379,
+        "delta_dr": 0.01,
+        "delta_dr_ci95": [
+          0.0025,
+          0.0201
+        ],
+        "significant_drop": true
       },
       "evasion": {
         "detection_rate": 0.98,
-        "mean_fraud_prob": 0.9782070708641549
+        "mean_fraud_prob": 0.9782070708641549,
+        "delta_dr": 0.0175,
+        "delta_dr_ci95": [
+          0.005,
+          0.03
+        ],
+        "significant_drop": true
       },
       "benign_disguise": {
         "detection_rate": 0.9325,
-        "mean_fraud_prob": 0.9274928404789534
+        "mean_fraud_prob": 0.9274928404789534,
+        "delta_dr": 0.065,
+        "delta_dr_ci95": [
+          0.0425,
+          0.0875
+        ],
+        "significant_drop": true
       },
       "code_switch": {
         "detection_rate": 0.94,
-        "mean_fraud_prob": 0.9343604197609239
+        "mean_fraud_prob": 0.9343604197609239,
+        "delta_dr": 0.0575,
+        "delta_dr_ci95": [
+          0.035,
+          0.0825
+        ],
+        "significant_drop": true
       }
     }
   }
