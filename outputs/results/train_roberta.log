@@ -1,0 +1,51 @@
+加载模型 /home/qiqi/.cache/hf_manual/chinese-roberta-wwm-ext ...
+Loading weights:   0%|          | 0/199 [00:00<?, ?it/s]Loading weights: 100%|██████████| 199/199 [00:00<00:00, 25934.21it/s]
+[transformers] [1mBertForSequenceClassification LOAD REPORT[0m from: /home/qiqi/.cache/hf_manual/chinese-roberta-wwm-ext
+Key                                        | Status     | 
+-------------------------------------------+------------+-
+cls.predictions.transform.LayerNorm.weight | UNEXPECTED | 
+cls.predictions.decoder.weight             | UNEXPECTED | 
+cls.seq_relationship.bias                  | UNEXPECTED | 
+cls.seq_relationship.weight                | UNEXPECTED | 
+cls.predictions.transform.dense.weight     | UNEXPECTED | 
+cls.predictions.bias                       | UNEXPECTED | 
+cls.predictions.transform.LayerNorm.bias   | UNEXPECTED | 
+cls.predictions.transform.dense.bias       | UNEXPECTED | 
+classifier.weight                          | MISSING    | 
+classifier.bias                            | MISSING    | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+  epoch 1 step 0/384 loss 0.8737
+  epoch 1 step 50/384 loss 0.1974
+  epoch 1 step 100/384 loss 0.0134
+  epoch 1 step 150/384 loss 0.0138
+  epoch 1 step 200/384 loss 0.0024
+  epoch 1 step 250/384 loss 0.0014
+  epoch 1 step 300/384 loss 0.0008
+  epoch 1 step 350/384 loss 0.0009
+[epoch 1] train_loss=0.0913 val_f1=0.9986 val_acc=0.9985
+Writing model shards:   0%|          | 0/1 [00:00<?, ?it/s]Writing model shards: 100%|██████████| 1/1 [00:00<00:00,  1.33it/s]Writing model shards: 100%|██████████| 1/1 [00:00<00:00,  1.33it/s]
+  epoch 2 step 0/384 loss 0.0026
+  epoch 2 step 50/384 loss 0.0081
+  epoch 2 step 100/384 loss 0.0009
+  epoch 2 step 150/384 loss 0.0024
+  epoch 2 step 200/384 loss 0.1235
+  epoch 2 step 250/384 loss 0.0007
+  epoch 2 step 300/384 loss 0.0004
+  epoch 2 step 350/384 loss 0.0003
+[epoch 2] train_loss=0.0023 val_f1=0.9973 val_acc=0.9971
+  epoch 3 step 0/384 loss 0.0004
+  epoch 3 step 50/384 loss 0.0003
+  epoch 3 step 100/384 loss 0.0003
+  epoch 3 step 150/384 loss 0.0003
+  epoch 3 step 200/384 loss 0.0002
+  epoch 3 step 250/384 loss 0.0002
+  epoch 3 step 300/384 loss 0.0002
+  epoch 3 step 350/384 loss 0.0002
+[epoch 3] train_loss=0.0003 val_f1=0.9973 val_acc=0.9971
+加载最优权重并在测试集评估...
+Loading weights:   0%|          | 0/201 [00:00<?, ?it/s]Loading weights: 100%|██████████| 201/201 [00:00<00:00, 2707.99it/s]
+[TEST] accuracy=0.9988  precision=0.9993  recall=0.9986  f1=0.9989
+结果已保存。

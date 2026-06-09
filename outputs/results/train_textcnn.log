@@ -1,0 +1,9 @@
+词表大小: 2745
+[epoch 1] loss=0.0897 val_f1=0.9993 val_acc=0.9993
+[epoch 2] loss=0.0143 val_f1=0.9993 val_acc=0.9993
+[epoch 3] loss=0.0071 val_f1=0.9993 val_acc=0.9993
+[epoch 4] loss=0.0048 val_f1=1.0000 val_acc=1.0000
+[epoch 5] loss=0.0028 val_f1=0.9986 val_acc=0.9985
+[epoch 6] loss=0.0063 val_f1=1.0000 val_acc=1.0000
+[TEST] accuracy=0.9996  precision=0.9993  recall=1.0000  f1=0.9996
+结果已保存。

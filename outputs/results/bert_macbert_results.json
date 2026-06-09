@@ -1,0 +1,90 @@
+{
+  "model": "/home/qiqi/.cache/hf_manual/chinese-macbert-base",
+  "tag": "macbert",
+  "args": {
+    "model": "/home/qiqi/.cache/hf_manual/chinese-macbert-base",
+    "tag": "macbert",
+    "epochs": 3,
+    "batch_size": 32,
+    "lr": 2e-05,
+    "max_len": 256
+  },
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 0.09246357038682618,
+      "val": {
+        "accuracy": 0.999266862170088,
+        "precision": 0.998639455782313,
+        "recall": 1.0,
+        "f1": 0.9993192648059904,
+        "confusion_matrix": [
+          [
+            629,
+            1
+          ],
+          [
+            0,
+            734
+          ]
+        ]
+      }
+    },
+    {
+      "epoch": 2,
+      "train_loss": 0.0022903170599117098,
+      "val": {
+        "accuracy": 0.999266862170088,
+        "precision": 0.998639455782313,
+        "recall": 1.0,
+        "f1": 0.9993192648059904,
+        "confusion_matrix": [
+          [
+            629,
+            1
+          ],
+          [
+            0,
+            734
+          ]
+        ]
+      }
+    },
+    {
+      "epoch": 3,
+      "train_loss": 0.00038609433947082533,
+      "val": {
+        "accuracy": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "confusion_matrix": [
+          [
+            630,
+            0
+          ],
+          [
+            0,
+            734
+          ]
+        ]
+      }
+    }
+  ],
+  "test": {
+    "accuracy": 0.9996081504702194,
+    "precision": 0.9992816091954023,
+    "recall": 1.0,
+    "f1": 0.9996406755300036,
+    "confusion_matrix": [
+      [
+        1160,
+        1
+      ],
+      [
+        0,
+        1391
+      ]
+    ]
+  }
+}
