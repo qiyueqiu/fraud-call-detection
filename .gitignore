@@ -1,1 +1,28 @@
+# 模型权重(体积大,不上传;可通过 run_all.sh 复现)
+outputs/models/
+*.bin
+*.safetensors
+*.pt
+*.joblib
+*.pkl
 
+# Python
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.venv/
+venv/
+
+# LaTeX 编译中间产物
+paper/*.aux
+paper/*.log
+paper/*.out
+paper/*.bbl
+paper/*.blg
+paper/*.xdv
+paper/*.fls
+paper/*.fdb_latexmk
+paper/*.toc
+
+# 系统
+.DS_Store
