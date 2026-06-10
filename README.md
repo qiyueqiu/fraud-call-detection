@@ -108,7 +108,7 @@ fraud_detection/
 │   └── models/                  # 训练好的模型权重
 ├── paper/
 │   ├── main.tex                 # 论文 LaTeX 源码
-│   ├── main.pdf                 # 编译后的论文(14 页)
+│   ├── main.pdf                 # 编译后的论文(19 页)
 │   └── references.bib           # 参考文献
 ├── requirements.txt
 └── run_all.sh                   # 一键复现脚本
